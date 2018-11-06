@@ -12,7 +12,7 @@ namespace Softserve_Chat_SignalR.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblChatMessage
+    public partial class tblChatMessages
     {
         public int iChatMessageID { get; set; }
         public int iUserID { get; set; }

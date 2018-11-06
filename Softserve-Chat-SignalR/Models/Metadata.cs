@@ -65,7 +65,7 @@ namespace Softserve_Chat_SignalR.Models
         public bool bIsDeleted;
     }
 
-    public class tblChatMessageMetadata
+    public class tblChatMessagesMetadata
     {
         [Display(Name = "Chat message ID")]
         public int iChatMessageID;
@@ -119,7 +119,7 @@ namespace Softserve_Chat_SignalR.Models
         [StringLength(50)]
         [Display(Name = "Contact number")]
         public string strContactNumber;
-        
+
         [Display(Name = "End of chat")]
         public System.DateTime dtEndOfChat;
 
@@ -129,7 +129,7 @@ namespace Softserve_Chat_SignalR.Models
 
         [Display(Name = "Reason for chat ID")]
         public int iReasonForChatID;
-        
+
         [Display(Name = "Ticket Status ID")]
         public int iStatusID;
 

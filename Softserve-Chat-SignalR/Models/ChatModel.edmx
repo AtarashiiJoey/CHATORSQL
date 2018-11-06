@@ -9,12 +9,12 @@
           <Key>
             <PropertyRef Name="iChatLogID" />
           </Key>
-          <Property Name="iChatLogID" Type="int" Nullable="false" />
+          <Property Name="iChatLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dtAdded" Type="datetime" Nullable="false" />
           <Property Name="iAddedBy" Type="int" Nullable="false" />
           <Property Name="dtEdited" Type="datetime" />
           <Property Name="iEditedBy" Type="int" />
-          <Property Name="iUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iUserID" Type="int" Nullable="false" />
           <Property Name="strFirstName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="strSurname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="strEmailAddress" Type="varchar" MaxLength="250" Nullable="false" />
@@ -29,8 +29,8 @@
           <Key>
             <PropertyRef Name="iChatMessageID" />
           </Key>
-          <Property Name="iChatMessageID" Type="int" Nullable="false" />
-          <Property Name="iUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iChatMessageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iUserID" Type="int" Nullable="false" />
           <Property Name="iChatLogID" Type="int" Nullable="false" />
           <Property Name="strMessage" Type="varchar" MaxLength="2500" Nullable="false" />
           <Property Name="bIsDeleted" Type="bit" Nullable="false" />
@@ -170,12 +170,12 @@
           <Key>
             <PropertyRef Name="iChatLogID" />
           </Key>
-          <Property Name="iChatLogID" Type="Int32" Nullable="false" />
+          <Property Name="iChatLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="dtAdded" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="iAddedBy" Type="Int32" Nullable="false" />
           <Property Name="dtEdited" Type="DateTime" Precision="3" />
           <Property Name="iEditedBy" Type="Int32" />
-          <Property Name="iUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iUserID" Type="Int32" Nullable="false" />
           <Property Name="strFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="strSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="strEmailAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
@@ -190,12 +190,12 @@
           <NavigationProperty Name="tblUser" Relationship="Self.FK_tblChatLogs_tblUsers" FromRole="tblChatLogs" ToRole="tblUsers" />
           <NavigationProperty Name="tblChatMessages" Relationship="Self.FK_tblChatMessages_tblChatLogs" FromRole="tblChatLogs" ToRole="tblChatMessages" />
         </EntityType>
-        <EntityType Name="tblChatMessage">
+        <EntityType Name="tblChatMessages">
           <Key>
             <PropertyRef Name="iChatMessageID" />
           </Key>
-          <Property Name="iChatMessageID" Type="Int32" Nullable="false" />
-          <Property Name="iUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iChatMessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iUserID" Type="Int32" Nullable="false" />
           <Property Name="iChatLogID" Type="Int32" Nullable="false" />
           <Property Name="strMessage" Type="String" MaxLength="2500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
@@ -283,7 +283,7 @@
         </Association>
         <Association Name="FK_tblChatMessages_tblChatLogs">
           <End Role="tblChatLogs" Type="Self.tblChatLog" Multiplicity="1" />
-          <End Role="tblChatMessages" Type="Self.tblChatMessage" Multiplicity="*" />
+          <End Role="tblChatMessages" Type="Model.tblChatMessages" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblChatLogs">
               <PropertyRef Name="iChatLogID" />
@@ -295,7 +295,7 @@
         </Association>
         <Association Name="FK_tblChatMessages_tblUsers">
           <End Role="tblUsers" Type="Self.tblUser" Multiplicity="1" />
-          <End Role="tblChatMessages" Type="Self.tblChatMessage" Multiplicity="*" />
+          <End Role="tblChatMessages" Type="Model.tblChatMessages" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblUsers">
               <PropertyRef Name="iUserID" />
@@ -307,7 +307,7 @@
         </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblChatLogs" EntityType="Self.tblChatLog" />
-          <EntitySet Name="tblChatMessages" EntityType="Self.tblChatMessage" />
+          <EntitySet Name="tblChatMessages1" EntityType="Model.tblChatMessages" />
           <EntitySet Name="tblReasonForChats" EntityType="Self.tblReasonForChat" />
           <EntitySet Name="tblStatuses" EntityType="Self.tblStatus" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
@@ -325,11 +325,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_tblChatMessages_tblChatLogs" Association="Self.FK_tblChatMessages_tblChatLogs">
             <End Role="tblChatLogs" EntitySet="tblChatLogs" />
-            <End Role="tblChatMessages" EntitySet="tblChatMessages" />
+            <End Role="tblChatMessages" EntitySet="tblChatMessages1" />
           </AssociationSet>
           <AssociationSet Name="FK_tblChatMessages_tblUsers" Association="Self.FK_tblChatMessages_tblUsers">
             <End Role="tblUsers" EntitySet="tblUsers" />
-            <End Role="tblChatMessages" EntitySet="tblChatMessages" />
+            <End Role="tblChatMessages" EntitySet="tblChatMessages1" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -359,8 +359,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblChatMessages">
-            <EntityTypeMapping TypeName="Model.tblChatMessage">
+          <EntitySetMapping Name="tblChatMessages1">
+            <EntityTypeMapping TypeName="Model.tblChatMessages">
               <MappingFragment StoreEntitySet="tblChatMessages">
                 <ScalarProperty Name="iChatMessageID" ColumnName="iChatMessageID" />
                 <ScalarProperty Name="iUserID" ColumnName="iUserID" />

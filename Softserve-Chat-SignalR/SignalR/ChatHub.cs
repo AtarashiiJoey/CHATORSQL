@@ -1,10 +1,10 @@
-﻿using System;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using System;
 
 namespace Softserve_Chat_SignalR.SignalR
 {
-    [HubName("chat")] 
+    [HubName("chat")]
     public class ChatHub : Hub
     {
         #region Chat Controls
@@ -20,7 +20,7 @@ namespace Softserve_Chat_SignalR.SignalR
         #endregion
 
         #region Chat Helpers
-// so these are essentially event links...
+        // so these are essentially event links...
         [HubMethodName("getServerDateTime")]
         public DateTime GetServerDateTime() => DateTime.Now;
         #endregion

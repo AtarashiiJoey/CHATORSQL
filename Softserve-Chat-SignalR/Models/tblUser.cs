@@ -18,7 +18,7 @@ namespace Softserve_Chat_SignalR.Models
         public tblUser()
         {
             this.tblChatLogs = new HashSet<tblChatLog>();
-            this.tblChatMessages = new HashSet<tblChatMessage>();
+            this.tblChatMessages = new HashSet<tblChatMessages>();
         }
     
         public int iUserID { get; set; }
@@ -35,6 +35,6 @@ namespace Softserve_Chat_SignalR.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblChatLog> tblChatLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblChatMessage> tblChatMessages { get; set; }
+        public virtual ICollection<tblChatMessages> tblChatMessages { get; set; }
     }
 }

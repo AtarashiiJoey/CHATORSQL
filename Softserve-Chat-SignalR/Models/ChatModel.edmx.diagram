@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="72a0dd6236b041b79e89ad7d33e0f272" Name="Diagram1">
+      <Diagram DiagramId="d479ec2d450c4d8bb274fa4c73e11e03" Name="Diagram1">
         <EntityTypeShape EntityType="Model.tblChatLog" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.tblChatMessage" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblChatMessages" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.tblReasonForChat" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.tblStatus" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.tblUser" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />

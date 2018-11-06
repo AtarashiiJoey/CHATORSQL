@@ -13,8 +13,8 @@ namespace Softserve_Chat_SignalR.Models
     {
     }
 
-    [MetadataType(typeof(tblChatMessageMetadata))]
-    public partial class tblChatMessage
+    [MetadataType(typeof(tblChatMessagesMetadata))]
+    public partial class tblChatMessages
     {
     }
 

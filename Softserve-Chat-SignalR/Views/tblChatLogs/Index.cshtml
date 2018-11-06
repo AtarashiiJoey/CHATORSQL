@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Softserve_Chat_SignalR.Models.tblChatLog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dtAdded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iAddedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtEdited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iEditedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strSurname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strEmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strContactNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtEndOfChat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strRef)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bIsDeleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblReasonForChat.strReason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblStatus.strStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblUser.strFirstName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtAdded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iAddedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtEdited)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iEditedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strSurname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strEmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strContactNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtEndOfChat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strRef)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bIsDeleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblReasonForChat.strReason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblStatus.strStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblUser.strFirstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.iChatLogID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iChatLogID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.iChatLogID })
+        </td>
+    </tr>
+}
+
+</table>

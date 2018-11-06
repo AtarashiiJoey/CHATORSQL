@@ -1,11 +1,11 @@
 ﻿using System;
-using Softserve_Chat_SignalR.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Softserve_Chat_SignalR.Models;
 
-namespace Softserve_Chat_SignalR.Views
+namespace Softserve_Chat_SignalR.Controllers
 {
     public class tblStatusController : Controller
     {

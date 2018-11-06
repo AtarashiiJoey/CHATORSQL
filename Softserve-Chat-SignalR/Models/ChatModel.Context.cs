@@ -26,7 +26,7 @@ namespace Softserve_Chat_SignalR.Models
         }
     
         public virtual DbSet<tblChatLog> tblChatLogs { get; set; }
-        public virtual DbSet<tblChatMessage> tblChatMessages { get; set; }
+        public virtual DbSet<tblChatMessages> tblChatMessages { get; set; }
         public virtual DbSet<tblReasonForChat> tblReasonForChats { get; set; }
         public virtual DbSet<tblStatus> tblStatuses { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
