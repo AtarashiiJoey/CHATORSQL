@@ -307,7 +307,7 @@
         </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblChatLogs" EntityType="Self.tblChatLog" />
-          <EntitySet Name="tblChatMessages1" EntityType="Model.tblChatMessages" />
+          <EntitySet Name="tblChatMessages" EntityType="Model.tblChatMessages" />
           <EntitySet Name="tblReasonForChats" EntityType="Self.tblReasonForChat" />
           <EntitySet Name="tblStatuses" EntityType="Self.tblStatus" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
@@ -325,11 +325,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_tblChatMessages_tblChatLogs" Association="Self.FK_tblChatMessages_tblChatLogs">
             <End Role="tblChatLogs" EntitySet="tblChatLogs" />
-            <End Role="tblChatMessages" EntitySet="tblChatMessages1" />
+            <End Role="tblChatMessages" EntitySet="tblChatMessages" />
           </AssociationSet>
           <AssociationSet Name="FK_tblChatMessages_tblUsers" Association="Self.FK_tblChatMessages_tblUsers">
             <End Role="tblUsers" EntitySet="tblUsers" />
-            <End Role="tblChatMessages" EntitySet="tblChatMessages1" />
+            <End Role="tblChatMessages" EntitySet="tblChatMessages" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -359,7 +359,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblChatMessages1">
+          <EntitySetMapping Name="tblChatMessages">
             <EntityTypeMapping TypeName="Model.tblChatMessages">
               <MappingFragment StoreEntitySet="tblChatMessages">
                 <ScalarProperty Name="iChatMessageID" ColumnName="iChatMessageID" />

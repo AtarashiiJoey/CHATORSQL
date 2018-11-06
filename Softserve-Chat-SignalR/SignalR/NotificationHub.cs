@@ -13,12 +13,12 @@ namespace Softserve_Chat_SignalR.Hubs
             Clients.All.broadcastMessage("Refresh");
         }
 
-        public void Initialize(String value)
+        public void Initialize(string value)
         {
             NotifierEntity = NotifierEntity.FromJson(value);
             if (NotifierEntity == null)
                 return;
-            Action<String> dispatcher = (t) => { DispatchToClient(); };
+            Action<string> dispatcher = (t) => { DispatchToClient(); };
             PushSqlDependency.Instance(NotifierEntity, dispatcher);
         }
     }

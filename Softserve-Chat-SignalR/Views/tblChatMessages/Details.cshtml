@@ -1,0 +1,50 @@
+﻿@model Softserve_Chat_SignalR.Models.tblChatMessages
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblChatMessages</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.strMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.strMessage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bIsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bIsDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblChatLog.strFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblChatLog.strFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblUser.strFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblUser.strFirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.iChatMessageID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

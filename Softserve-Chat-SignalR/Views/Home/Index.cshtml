@@ -1,9 +1,5 @@
 ﻿<h1>HOME PAGE</h1>
 
-<hr />
-<h2> Select a thing up there</h2>
-<hr />
-
 <div style="padding:10px 0px 10px 10px">
     New Messages:
     <ul id="messagecontainer"></ul>
@@ -21,13 +17,13 @@
         $(function () {
             // Reference the auto-generated proxy for the hub.
             var clientHub = $.connection.messageSender;
+            $('#messagecontainer').append('<li>' + "This is a test message" + '</li>'+'<hr/>');
             // Create a function that the hub can call back to display messages.
             clientHub.client.broadcastMessage = function (message) {
                 // Add the message to page.
-                $('#messagecontainer').append('<li>' + message + '</li>');
+                $('#messagecontainer').append('<li>' + message + '</li>'+'<hr/>');
             };
-            $.connection.hub.start().done();
+            $.connection.hub.start().done(alert("Started"));
         });
-
     </script>
 }

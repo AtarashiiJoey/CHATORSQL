@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Softserve_Chat_SignalR.Models.tblChatMessages>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.strMessage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bIsDeleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblChatLog.strFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblUser.strFirstName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.strMessage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bIsDeleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblChatLog.strFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblUser.strFirstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.iChatMessageID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iChatMessageID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.iChatMessageID })
+        </td>
+    </tr>
+}
+
+</table>
