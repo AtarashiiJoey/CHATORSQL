@@ -14,5 +14,19 @@ namespace Softserve_Chat_SignalR.Controllers
 
             return View();
         }
+
+        public ActionResult Chat()
+        {
+            ViewBag.Title = "Chat Page";
+
+            return View();
+        }
+
+        public ActionResult Admin()
+        {
+            ViewBag.Title = "Admin Page";
+
+            return View();
+        }
     }
 }

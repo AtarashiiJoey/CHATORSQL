@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Softserve_Chat_SignalR.Models.tblStatus>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dtAdded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iAddedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtEdited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iEditedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bIsDeleted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtAdded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iAddedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtEdited)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iEditedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bIsDeleted)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.iStatusID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iStatusID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.iStatusID })
+        </td>
+    </tr>
+}
+
+</table>

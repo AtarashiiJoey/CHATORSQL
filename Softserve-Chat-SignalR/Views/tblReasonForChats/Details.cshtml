@@ -1,0 +1,66 @@
+﻿@model Softserve_Chat_SignalR.Models.tblReasonForChat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblReasonForChat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dtAdded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dtAdded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iAddedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iAddedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dtEdited)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dtEdited)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iEditedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iEditedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.strReason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.strReason)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bIsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bIsDeleted)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.iReasonForChatID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .chatArea {
+        height: 70%;
+        width: 90%;
+        background-color: lightgoldenrodyellow;
+    }
+</style>
+
+<fieldset>
+    <legend style="color: lightskyblue">Welcome Softserve Digital Chat Template</legend>
+</fieldset>
+
+<div class="form-group col-xl-12">
+    <hr />
+    <label style="color: slateblue;font-style:oblique;font-size:medium" id="label2">Conversations History</label>
+    <div class="container chatArea">
+        <div class="row">
+            <input type="hidden" id="displayname" />
+            <ul id="discussion"></ul>
+        </div>
+    </div>
+    <hr />
+    <label style="color: slateblue; font-style: oblique;font-size: medium" id="label1">How may we help?</label><br />
+    <br />
+    <div class="container" align="center">
+        <div class="row">
+            <div class="col-sm-1" align="right">
+                <label for="message">Say:</label>
+            </div>
+            <div class="col-sm-5" align="center" spellcheck="true">
+                <input type="text" class="form-control" id="message">
+            </div>
+            <div class="col-sm-1" align="left">
+                <input type="submit" id="sendmessage" class="btn-primary" value="Send" />
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/ScriptsChat/ChatSignalR.js"
+            type="text/javascript">
+    </script>
+}

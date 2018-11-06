@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblChatLogs">
+          <Key>
+            <PropertyRef Name="iChatLogID" />
+          </Key>
+          <Property Name="iChatLogID" Type="int" Nullable="false" />
+          <Property Name="dtAdded" Type="datetime" Nullable="false" />
+          <Property Name="iAddedBy" Type="int" Nullable="false" />
+          <Property Name="dtEdited" Type="datetime" />
+          <Property Name="iEditedBy" Type="int" />
+          <Property Name="iUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strFirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="strSurname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="strEmailAddress" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="strContactNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dtEndOfChat" Type="datetime" Nullable="false" />
+          <Property Name="strRef" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="iReasonForChatID" Type="int" Nullable="false" />
+          <Property Name="iStatusID" Type="int" Nullable="false" />
+          <Property Name="bIsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblChatMessages">
+          <Key>
+            <PropertyRef Name="iChatMessageID" />
+          </Key>
+          <Property Name="iChatMessageID" Type="int" Nullable="false" />
+          <Property Name="iUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iChatLogID" Type="int" Nullable="false" />
+          <Property Name="strMessage" Type="varchar" MaxLength="2500" Nullable="false" />
+          <Property Name="bIsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblReasonForChats">
+          <Key>
+            <PropertyRef Name="iReasonForChatID" />
+          </Key>
+          <Property Name="iReasonForChatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dtAdded" Type="datetime" Nullable="false" />
+          <Property Name="iAddedBy" Type="int" Nullable="false" />
+          <Property Name="dtEdited" Type="datetime" />
+          <Property Name="iEditedBy" Type="int" />
+          <Property Name="strReason" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bIsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblStatuses">
+          <Key>
+            <PropertyRef Name="iStatusID" />
+          </Key>
+          <Property Name="iStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dtAdded" Type="datetime" Nullable="false" />
+          <Property Name="iAddedBy" Type="int" Nullable="false" />
+          <Property Name="dtEdited" Type="datetime" />
+          <Property Name="iEditedBy" Type="int" />
+          <Property Name="strStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bIsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUsers">
+          <Key>
+            <PropertyRef Name="iUserID" />
+          </Key>
+          <Property Name="iUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dtAdded" Type="datetime" Nullable="false" />
+          <Property Name="iAddedBy" Type="int" Nullable="false" />
+          <Property Name="dtEdited" Type="datetime" />
+          <Property Name="iEditedBy" Type="int" />
+          <Property Name="strFirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="strSurname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="strEmailAddress" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="strPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bIsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblChatLogs_tblReasonForChats">
+          <End Role="tblReasonForChats" Type="Self.tblReasonForChats" Multiplicity="1" />
+          <End Role="tblChatLogs" Type="Self.tblChatLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblReasonForChats">
+              <PropertyRef Name="iReasonForChatID" />
+            </Principal>
+            <Dependent Role="tblChatLogs">
+              <PropertyRef Name="iReasonForChatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChatLogs_tblStatuses">
+          <End Role="tblStatuses" Type="Self.tblStatuses" Multiplicity="1" />
+          <End Role="tblChatLogs" Type="Self.tblChatLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatuses">
+              <PropertyRef Name="iStatusID" />
+            </Principal>
+            <Dependent Role="tblChatLogs">
+              <PropertyRef Name="iStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChatLogs_tblUsers">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+          <End Role="tblChatLogs" Type="Self.tblChatLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="iUserID" />
+            </Principal>
+            <Dependent Role="tblChatLogs">
+              <PropertyRef Name="iUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChatMessages_tblChatLogs">
+          <End Role="tblChatLogs" Type="Self.tblChatLogs" Multiplicity="1" />
+          <End Role="tblChatMessages" Type="Self.tblChatMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblChatLogs">
+              <PropertyRef Name="iChatLogID" />
+            </Principal>
+            <Dependent Role="tblChatMessages">
+              <PropertyRef Name="iChatLogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChatMessages_tblUsers">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+          <End Role="tblChatMessages" Type="Self.tblChatMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="iUserID" />
+            </Principal>
+            <Dependent Role="tblChatMessages">
+              <PropertyRef Name="iUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="tblChatLogs" EntityType="Self.tblChatLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblChatMessages" EntityType="Self.tblChatMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReasonForChats" EntityType="Self.tblReasonForChats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStatuses" EntityType="Self.tblStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblChatLogs_tblReasonForChats" Association="Self.FK_tblChatLogs_tblReasonForChats">
+            <End Role="tblReasonForChats" EntitySet="tblReasonForChats" />
+            <End Role="tblChatLogs" EntitySet="tblChatLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChatLogs_tblStatuses" Association="Self.FK_tblChatLogs_tblStatuses">
+            <End Role="tblStatuses" EntitySet="tblStatuses" />
+            <End Role="tblChatLogs" EntitySet="tblChatLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChatLogs_tblUsers" Association="Self.FK_tblChatLogs_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblChatLogs" EntitySet="tblChatLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChatMessages_tblChatLogs" Association="Self.FK_tblChatMessages_tblChatLogs">
+            <End Role="tblChatLogs" EntitySet="tblChatLogs" />
+            <End Role="tblChatMessages" EntitySet="tblChatMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChatMessages_tblUsers" Association="Self.FK_tblChatMessages_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblChatMessages" EntitySet="tblChatMessages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblChatLog">
+          <Key>
+            <PropertyRef Name="iChatLogID" />
+          </Key>
+          <Property Name="iChatLogID" Type="Int32" Nullable="false" />
+          <Property Name="dtAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="iAddedBy" Type="Int32" Nullable="false" />
+          <Property Name="dtEdited" Type="DateTime" Precision="3" />
+          <Property Name="iEditedBy" Type="Int32" />
+          <Property Name="iUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strEmailAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dtEndOfChat" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="strRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="iReasonForChatID" Type="Int32" Nullable="false" />
+          <Property Name="iStatusID" Type="Int32" Nullable="false" />
+          <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblReasonForChat" Relationship="Self.FK_tblChatLogs_tblReasonForChats" FromRole="tblChatLogs" ToRole="tblReasonForChats" />
+          <NavigationProperty Name="tblStatus" Relationship="Self.FK_tblChatLogs_tblStatuses" FromRole="tblChatLogs" ToRole="tblStatuses" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblChatLogs_tblUsers" FromRole="tblChatLogs" ToRole="tblUsers" />
+          <NavigationProperty Name="tblChatMessages" Relationship="Self.FK_tblChatMessages_tblChatLogs" FromRole="tblChatLogs" ToRole="tblChatMessages" />
+        </EntityType>
+        <EntityType Name="tblChatMessage">
+          <Key>
+            <PropertyRef Name="iChatMessageID" />
+          </Key>
+          <Property Name="iChatMessageID" Type="Int32" Nullable="false" />
+          <Property Name="iUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iChatLogID" Type="Int32" Nullable="false" />
+          <Property Name="strMessage" Type="String" MaxLength="2500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblChatLog" Relationship="Self.FK_tblChatMessages_tblChatLogs" FromRole="tblChatMessages" ToRole="tblChatLogs" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblChatMessages_tblUsers" FromRole="tblChatMessages" ToRole="tblUsers" />
+        </EntityType>
+        <EntityType Name="tblReasonForChat">
+          <Key>
+            <PropertyRef Name="iReasonForChatID" />
+          </Key>
+          <Property Name="iReasonForChatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dtAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="iAddedBy" Type="Int32" Nullable="false" />
+          <Property Name="dtEdited" Type="DateTime" Precision="3" />
+          <Property Name="iEditedBy" Type="Int32" />
+          <Property Name="strReason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblChatLogs" Relationship="Self.FK_tblChatLogs_tblReasonForChats" FromRole="tblReasonForChats" ToRole="tblChatLogs" />
+        </EntityType>
+        <EntityType Name="tblStatus">
+          <Key>
+            <PropertyRef Name="iStatusID" />
+          </Key>
+          <Property Name="iStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dtAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="iAddedBy" Type="Int32" Nullable="false" />
+          <Property Name="dtEdited" Type="DateTime" Precision="3" />
+          <Property Name="iEditedBy" Type="Int32" />
+          <Property Name="strStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblChatLogs" Relationship="Self.FK_tblChatLogs_tblStatuses" FromRole="tblStatuses" ToRole="tblChatLogs" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="iUserID" />
+          </Key>
+          <Property Name="iUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dtAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="iAddedBy" Type="Int32" Nullable="false" />
+          <Property Name="dtEdited" Type="DateTime" Precision="3" />
+          <Property Name="iEditedBy" Type="Int32" />
+          <Property Name="strFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strEmailAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bIsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblChatLogs" Relationship="Self.FK_tblChatLogs_tblUsers" FromRole="tblUsers" ToRole="tblChatLogs" />
+          <NavigationProperty Name="tblChatMessages" Relationship="Self.FK_tblChatMessages_tblUsers" FromRole="tblUsers" ToRole="tblChatMessages" />
+        </EntityType>
+        <Association Name="FK_tblChatLogs_tblReasonForChats">
+          <End Role="tblReasonForChats" Type="Self.tblReasonForChat" Multiplicity="1" />
+          <End Role="tblChatLogs" Type="Self.tblChatLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblReasonForChats">
+              <PropertyRef Name="iReasonForChatID" />
+            </Principal>
+            <Dependent Role="tblChatLogs">
+              <PropertyRef Name="iReasonForChatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChatLogs_tblStatuses">
+          <End Role="tblStatuses" Type="Self.tblStatus" Multiplicity="1" />
+          <End Role="tblChatLogs" Type="Self.tblChatLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStatuses">
+              <PropertyRef Name="iStatusID" />
+            </Principal>
+            <Dependent Role="tblChatLogs">
+              <PropertyRef Name="iStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChatLogs_tblUsers">
+          <End Role="tblUsers" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblChatLogs" Type="Self.tblChatLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="iUserID" />
+            </Principal>
+            <Dependent Role="tblChatLogs">
+              <PropertyRef Name="iUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChatMessages_tblChatLogs">
+          <End Role="tblChatLogs" Type="Self.tblChatLog" Multiplicity="1" />
+          <End Role="tblChatMessages" Type="Self.tblChatMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblChatLogs">
+              <PropertyRef Name="iChatLogID" />
+            </Principal>
+            <Dependent Role="tblChatMessages">
+              <PropertyRef Name="iChatLogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChatMessages_tblUsers">
+          <End Role="tblUsers" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblChatMessages" Type="Self.tblChatMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="iUserID" />
+            </Principal>
+            <Dependent Role="tblChatMessages">
+              <PropertyRef Name="iUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblChatLogs" EntityType="Self.tblChatLog" />
+          <EntitySet Name="tblChatMessages" EntityType="Self.tblChatMessage" />
+          <EntitySet Name="tblReasonForChats" EntityType="Self.tblReasonForChat" />
+          <EntitySet Name="tblStatuses" EntityType="Self.tblStatus" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <AssociationSet Name="FK_tblChatLogs_tblReasonForChats" Association="Self.FK_tblChatLogs_tblReasonForChats">
+            <End Role="tblReasonForChats" EntitySet="tblReasonForChats" />
+            <End Role="tblChatLogs" EntitySet="tblChatLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChatLogs_tblStatuses" Association="Self.FK_tblChatLogs_tblStatuses">
+            <End Role="tblStatuses" EntitySet="tblStatuses" />
+            <End Role="tblChatLogs" EntitySet="tblChatLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChatLogs_tblUsers" Association="Self.FK_tblChatLogs_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblChatLogs" EntitySet="tblChatLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChatMessages_tblChatLogs" Association="Self.FK_tblChatMessages_tblChatLogs">
+            <End Role="tblChatLogs" EntitySet="tblChatLogs" />
+            <End Role="tblChatMessages" EntitySet="tblChatMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChatMessages_tblUsers" Association="Self.FK_tblChatMessages_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblChatMessages" EntitySet="tblChatMessages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="tblChatLogs">
+            <EntityTypeMapping TypeName="Model.tblChatLog">
+              <MappingFragment StoreEntitySet="tblChatLogs">
+                <ScalarProperty Name="iChatLogID" ColumnName="iChatLogID" />
+                <ScalarProperty Name="dtAdded" ColumnName="dtAdded" />
+                <ScalarProperty Name="iAddedBy" ColumnName="iAddedBy" />
+                <ScalarProperty Name="dtEdited" ColumnName="dtEdited" />
+                <ScalarProperty Name="iEditedBy" ColumnName="iEditedBy" />
+                <ScalarProperty Name="iUserID" ColumnName="iUserID" />
+                <ScalarProperty Name="strFirstName" ColumnName="strFirstName" />
+                <ScalarProperty Name="strSurname" ColumnName="strSurname" />
+                <ScalarProperty Name="strEmailAddress" ColumnName="strEmailAddress" />
+                <ScalarProperty Name="strContactNumber" ColumnName="strContactNumber" />
+                <ScalarProperty Name="dtEndOfChat" ColumnName="dtEndOfChat" />
+                <ScalarProperty Name="strRef" ColumnName="strRef" />
+                <ScalarProperty Name="iReasonForChatID" ColumnName="iReasonForChatID" />
+                <ScalarProperty Name="iStatusID" ColumnName="iStatusID" />
+                <ScalarProperty Name="bIsDeleted" ColumnName="bIsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblChatMessages">
+            <EntityTypeMapping TypeName="Model.tblChatMessage">
+              <MappingFragment StoreEntitySet="tblChatMessages">
+                <ScalarProperty Name="iChatMessageID" ColumnName="iChatMessageID" />
+                <ScalarProperty Name="iUserID" ColumnName="iUserID" />
+                <ScalarProperty Name="iChatLogID" ColumnName="iChatLogID" />
+                <ScalarProperty Name="strMessage" ColumnName="strMessage" />
+                <ScalarProperty Name="bIsDeleted" ColumnName="bIsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReasonForChats">
+            <EntityTypeMapping TypeName="Model.tblReasonForChat">
+              <MappingFragment StoreEntitySet="tblReasonForChats">
+                <ScalarProperty Name="iReasonForChatID" ColumnName="iReasonForChatID" />
+                <ScalarProperty Name="dtAdded" ColumnName="dtAdded" />
+                <ScalarProperty Name="iAddedBy" ColumnName="iAddedBy" />
+                <ScalarProperty Name="dtEdited" ColumnName="dtEdited" />
+                <ScalarProperty Name="iEditedBy" ColumnName="iEditedBy" />
+                <ScalarProperty Name="strReason" ColumnName="strReason" />
+                <ScalarProperty Name="bIsDeleted" ColumnName="bIsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStatuses">
+            <EntityTypeMapping TypeName="Model.tblStatus">
+              <MappingFragment StoreEntitySet="tblStatuses">
+                <ScalarProperty Name="iStatusID" ColumnName="iStatusID" />
+                <ScalarProperty Name="dtAdded" ColumnName="dtAdded" />
+                <ScalarProperty Name="iAddedBy" ColumnName="iAddedBy" />
+                <ScalarProperty Name="dtEdited" ColumnName="dtEdited" />
+                <ScalarProperty Name="iEditedBy" ColumnName="iEditedBy" />
+                <ScalarProperty Name="strStatus" ColumnName="strStatus" />
+                <ScalarProperty Name="bIsDeleted" ColumnName="bIsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="Model.tblUser">
+              <MappingFragment StoreEntitySet="tblUsers">
+                <ScalarProperty Name="iUserID" ColumnName="iUserID" />
+                <ScalarProperty Name="dtAdded" ColumnName="dtAdded" />
+                <ScalarProperty Name="iAddedBy" ColumnName="iAddedBy" />
+                <ScalarProperty Name="dtEdited" ColumnName="dtEdited" />
+                <ScalarProperty Name="iEditedBy" ColumnName="iEditedBy" />
+                <ScalarProperty Name="strFirstName" ColumnName="strFirstName" />
+                <ScalarProperty Name="strSurname" ColumnName="strSurname" />
+                <ScalarProperty Name="strEmailAddress" ColumnName="strEmailAddress" />
+                <ScalarProperty Name="strPassword" ColumnName="strPassword" />
+                <ScalarProperty Name="bIsDeleted" ColumnName="bIsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,72 @@
+﻿@model Softserve_Chat_SignalR.Models.tblStatus
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tblStatus</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dtAdded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dtAdded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iAddedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iAddedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dtEdited)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dtEdited)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iEditedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iEditedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.strStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.strStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bIsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bIsDeleted)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
