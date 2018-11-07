@@ -1,9 +1,67 @@
-﻿<h1>HOME PAGE</h1>
+﻿@model Softserve_Chat_SignalR.Models.tblChatMessages
+
+
+<h1>HOME PAGE</h1>
 
 <div style="padding:10px 0px 10px 10px">
     New Messages:
     <ul id="messagecontainer"></ul>
 </div>
+
+<hr/>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Chatty Chatty</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row" style="padding: 10px 10px 10px 10px">
+            <div class="form-group col-sm-5">
+                @Html.LabelFor(model => model.iUserID, "iUserID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("iUserID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.iUserID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-sm-5">
+                @Html.LabelFor(model => model.iChatLogID, "iChatLogID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("iChatLogID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.iChatLogID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding: 10px 10px 10px 10px">
+            <div class="form-group col-sm-5">
+                @Html.LabelFor(model => model.strMessage, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.strMessage, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.strMessage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-sm-5">
+                @Html.LabelFor(model => model.bIsDeleted, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox" align="left" style="padding: 7px 0px 5px 25px">
+                        @Html.EditorFor(model => model.bIsDeleted)
+                        @Html.ValidationMessageFor(model => model.bIsDeleted, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
 @section scripts {
     <!--
     <script src="~/Scripts/jquery.signalR-2.0.3.min.js"></script>
@@ -17,13 +75,17 @@
         $(function () {
             // Reference the auto-generated proxy for the hub.
             var clientHub = $.connection.messageSender;
-            $('#messagecontainer').append('<li>' + "This is a test message" + '</li>'+'<hr/>');
             // Create a function that the hub can call back to display messages.
+            clientHub.client.clearMessage = function (message) {
+                // Add the message to page.
+                $("#messagecontainer").empty();
+                $('#messagecontainer').append('<li>' + "This is a test message" + '</li>' + '<hr/>');
+            };
             clientHub.client.broadcastMessage = function (message) {
                 // Add the message to page.
-                $('#messagecontainer').append('<li>' + message + '</li>'+'<hr/>');
+                $('#messagecontainer').append('<li>' + message + '</li>' + '<hr/>');
             };
-            $.connection.hub.start().done(alert("Started"));
+            $.connection.hub.start();
         });
     </script>
 }

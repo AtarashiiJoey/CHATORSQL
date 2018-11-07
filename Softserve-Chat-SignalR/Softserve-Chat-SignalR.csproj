@@ -269,6 +269,8 @@
     <Compile Include="SqlServerNotifier\SqlDependencyRegister.cs" />
     <Compile Include="SqlServerNotifier\SqlNotificationEventHandler.cs" />
     <Compile Include="Controllers\tblStatusController.cs" />
+    <Compile Include="XMLgen\Classes\CreateInvoiceFromSalesOrder.cs" />
+    <Compile Include="XMLgen\XmlSerializerTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

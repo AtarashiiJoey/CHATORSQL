@@ -8,8 +8,9 @@ namespace Softserve_Chat_SignalR.SignalR
     {
         public void DispatchToClient(IEnumerable<string> messages)
         {
-            foreach (string message in messages)
-                Clients.All.broadcastMessage(message);
+            Clients.All.ClearMessage();
+            foreach (var message in messages)
+            Clients.All.broadcastMessage(message);
         }
         public MessageSender()
         {

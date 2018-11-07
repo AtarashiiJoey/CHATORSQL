@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using System;
+using Softserve_Chat_SignalR.XMLgen;
 
 namespace Softserve_Chat_SignalR.SignalR
 {

@@ -42,6 +42,8 @@ namespace Softserve_Chat_SignalR.SqlServerNotifier
         }
         private void dependency_OnChange(object sender, SqlNotificationEventArgs e)
         {
+            var dependency = (SqlDependency)sender;
+            dependency.OnChange -= dependency_OnChange;
             NewMessage?.Invoke(sender, e);
             //subscribe again to notifier
             RegisterForNotifications();
